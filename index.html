@@ -2,42 +2,73 @@
 <html lang="lv">
 <head>
   <meta charset="UTF-8">
-  <title>Homo Novus – Audio ieraksts</title>
+  <title>Homo Novus – Klausies</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
+      overflow: hidden;
       font-family: Arial, sans-serif;
+    }
+
+    body {
       background: url('https://raw.githubusercontent.com/Vecvagars/Homo_novus_audio/main/background.png') no-repeat center center fixed;
       background-size: cover;
-      color: white;
-      text-align: center;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
-      backdrop-filter: brightness(0.5);
     }
 
-    h1 {
-      font-size: 2em;
-      margin-bottom: 20px;
-      text-shadow: 1px 1px 5px #000;
+    #playButton {
+      width: 100px;
+      height: 100px;
+      background-color: #ffcc00;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(255, 255, 0, 0.6);
+      animation: pulse 1.5s infinite;
+      transition: transform 0.2s ease;
+    }
+
+    #playButton:hover {
+      transform: scale(1.1);
+    }
+
+    #playButton::before {
+      content: "▶";
+      font-size: 42px;
+      color: #000;
+      margin-left: 5px;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 255, 0, 0.5); }
+      70% { box-shadow: 0 0 0 20px rgba(255, 255, 0, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 255, 0, 0); }
     }
 
     audio {
-      width: 90%;
-      max-width: 600px;
-      margin: 0 auto;
+      display: none;
     }
   </style>
 </head>
 <body>
-  <h1>🎧 Klausies “Homo Novus” audio ierakstu</h1>
-  <audio controls autoplay>
-    <source src="https://raw.githubusercontent.com/Vecvagars/Homo_novus_audio/main/1749138909001608777z4s85pvf-voicemaker.in-speech.mp3" type="audio/mpeg">
-    Jūsu pārlūkprogramma neatbalsta audio atskaņošanu.
-  </audio>
+
+  <div id="playButton" onclick="playAudio()"></div>
+
+  <audio id="audio" src="https://raw.githubusercontent.com/Vecvagars/Homo_novus_audio/main/1749138909001608777z4s85pvf-voicemaker.in-speech.mp3"></audio>
+
+  <script>
+    function playAudio() {
+      const audio = document.getElementById('audio');
+      audio.play();
+      document.getElementById('playButton').style.display = 'none';
+    }
+  </script>
+
 </body>
 </html>
