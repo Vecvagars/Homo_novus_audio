@@ -8,13 +8,13 @@
       margin: 0;
       padding: 0;
       height: 100%;
-      overflow: hidden;
       font-family: Arial, sans-serif;
+      background: url('https://raw.githubusercontent.com/Vecvagars/Homo_novus_audio/main/background.png') no-repeat center center fixed;
+      background-size: cover;
+      overflow: hidden;
     }
 
     body {
-      background: url('https://raw.githubusercontent.com/Vecvagars/Homo_novus_audio/main/background.png') no-repeat center center fixed;
-      background-size: cover;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -22,8 +22,8 @@
     }
 
     #playButton {
-      width: 100px;
-      height: 100px;
+      width: 120px;
+      height: 120px;
       background-color: #ffcc00;
       border-radius: 50%;
       display: flex;
@@ -32,15 +32,17 @@
       cursor: pointer;
       box-shadow: 0 0 20px rgba(255, 255, 0, 0.6);
       animation: pulse 1.5s infinite;
-      margin-bottom: 20px;
+      position: relative;
+      z-index: 10;
     }
 
-    #playButton:hover {
-      transform: scale(1.1);
+    #playButton:hover span.word {
+      opacity: 1;
+      transform: translate(var(--x), var(--y)) scale(1);
     }
 
     #playButton::before {
-      content: "▶";
+      content: "\25B6"; /* play symbol */
       font-size: 42px;
       color: #000;
       margin-left: 5px;
@@ -52,30 +54,83 @@
       100% { box-shadow: 0 0 0 0 rgba(255, 255, 0, 0); }
     }
 
+    .word {
+      position: absolute;
+      font-size: 14px;
+      font-weight: bold;
+      color: white;
+      opacity: 0;
+      transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+      transform: translate(0, 0) scale(0.5);
+    }
+
     #audio {
       width: 90%;
       max-width: 600px;
+      margin-top: 20px;
       visibility: hidden;
+      z-index: 5;
+    }
+
+    #trainTrack {
+      margin-top: 20px;
+      width: 90%;
+      max-width: 600px;
+      height: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #train {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 40px;
+      height: 40px;
+      transition: left 0.1s linear;
     }
   </style>
 </head>
 <body>
-
-  <div id="playButton" onclick="playAudio()"></div>
+  <div id="playButton" onclick="playAudio()">
+    <!-- Word particles -->
+    <span class="word" style="--x: -80px; --y: -50px;">Borderline</span>
+    <span class="word" style="--x: 60px; --y: -60px;">Visible</span>
+    <span class="word" style="--x: -90px; --y: 30px;">Fragment</span>
+    <span class="word" style="--x: 100px; --y: 40px;">Echo</span>
+    <span class="word" style="--x: -60px; --y: 90px;">Pulse</span>
+    <span class="word" style="--x: 80px; --y: -20px;">Shadow</span>
+    <span class="word" style="--x: -110px; --y: -30px;">Threshold</span>
+    <span class="word" style="--x: 30px; --y: 90px;">Crossing</span>
+    <span class="word" style="--x: 0px; --y: -100px;">Voicemaker</span>
+    <span class="word" style="--x: 70px; --y: 70px;">Transit</span>
+    <span class="word" style="--x: -70px; --y: -70px;">Disorder</span>
+  </div>
 
   <audio id="audio" controls>
     <source src="https://raw.githubusercontent.com/Vecvagars/Homo_novus_audio/main/1749138909001608777z4s85pvf-voicemaker.in-speech.mp3" type="audio/mpeg">
-    Jūsu pārlūkprogramma neatbalsta audio atskaņošanu.
   </audio>
 
+  <div id="trainTrack">
+    <img id="train" src="https://upload.wikimedia.org/wikipedia/commons/4/49/Train_icon.svg" alt="Vilciens">
+  </div>
+
   <script>
+    const audio = document.getElementById("audio");
+    const train = document.getElementById("train");
+    const trainTrack = document.getElementById("trainTrack");
+
     function playAudio() {
-      const audio = document.getElementById('audio');
-      document.getElementById('playButton').style.display = 'none';
-      audio.style.visibility = 'visible';
+      document.getElementById("playButton").style.display = "none";
+      audio.style.visibility = "visible";
       audio.play();
     }
-  </script>
 
+    audio.addEventListener("timeupdate", () => {
+      const progress = audio.currentTime / audio.duration;
+      const maxPos = trainTrack.offsetWidth - train.offsetWidth;
+      train.style.left = (progress * maxPos) + "px";
+    });
+  </script>
 </body>
 </html>
