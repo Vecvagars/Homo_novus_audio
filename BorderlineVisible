@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+  <meta charset="UTF-8">
+  <title>Balss fragments</title>
+</head>
+<body>
+  <h2>🎧 Klausies balss ierakstu</h2>
+  <audio controls>
+    <source src="https://asset.cloudinary.com/dbriojc2q/a29182fd03310230b6a5f1b5cc017ffa">
+    Jūsu pārlūkprogramma neatbalsta audio atskaņošanu.
+  </audio>
+</body>
+</html>
