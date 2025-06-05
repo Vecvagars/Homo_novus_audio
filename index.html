@@ -18,6 +18,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
     }
 
     #playButton {
@@ -31,7 +32,7 @@
       cursor: pointer;
       box-shadow: 0 0 20px rgba(255, 255, 0, 0.6);
       animation: pulse 1.5s infinite;
-      transition: transform 0.2s ease;
+      margin-bottom: 20px;
     }
 
     #playButton:hover {
@@ -51,22 +52,32 @@
       100% { box-shadow: 0 0 0 0 rgba(255, 255, 0, 0); }
     }
 
-    audio {
+    #audioContainer {
       display: none;
+    }
+
+    audio {
+      width: 90%;
+      max-width: 600px;
     }
   </style>
 </head>
 <body>
 
-  <div id="playButton" onclick="playAudio()"></div>
+  <div id="playButton" onclick="showPlayerAndPlay()"></div>
 
-  <audio id="audio" src="https://raw.githubusercontent.com/Vecvagars/Homo_novus_audio/main/1749138909001608777z4s85pvf-voicemaker.in-speech.mp3"></audio>
+  <div id="audioContainer">
+    <audio id="audio" controls autoplay>
+      <source src="https://raw.githubusercontent.com/Vecvagars/Homo_novus_audio/main/1749138909001608777z4s85pvf-voicemaker.in-speech.mp3" type="audio/mpeg">
+      Jūsu pārlūkprogramma neatbalsta audio atskaņošanu.
+    </audio>
+  </div>
 
   <script>
-    function playAudio() {
-      const audio = document.getElementById('audio');
-      audio.play();
+    function showPlayerAndPlay() {
       document.getElementById('playButton').style.display = 'none';
+      document.getElementById('audioContainer').style.display = 'block';
+      document.getElementById('audio').play();
     }
   </script>
 
