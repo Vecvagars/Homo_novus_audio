@@ -46,9 +46,14 @@
     #playButton::before {
       content: "▶";
       font-size: 8vw;
-      max-font-size: 42px;
       color: #000;
       margin-left: 2px;
+    }
+    
+    @media (min-width: 768px) {
+      #playButton::before {
+        font-size: 42px;
+      }
     }
 
     @keyframes pulse {
