@@ -2,28 +2,32 @@
 <html lang="lv">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Homo Novus – Klausies</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      overflow: hidden;
       font-family: Arial, sans-serif;
+      background: url('https://raw.githubusercontent.com/Vecvagars/Homo_novus_audio/main/background.png') no-repeat center center fixed;
+      background-size: cover;
     }
 
     body {
-      background: url('https://raw.githubusercontent.com/Vecvagars/Homo_novus_audio/main/background.png') no-repeat center center fixed;
-      background-size: cover;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
+      padding: 5vh 5vw;
+      box-sizing: border-box;
     }
 
     #playButton {
-      width: 100px;
-      height: 100px;
+      width: 22vw;
+      height: 22vw;
+      max-width: 120px;
+      max-height: 120px;
       background-color: #ffcc00;
       border-radius: 50%;
       display: flex;
@@ -32,18 +36,19 @@
       cursor: pointer;
       box-shadow: 0 0 20px rgba(255, 255, 0, 0.6);
       animation: pulse 1.5s infinite;
-      margin-bottom: 20px;
+      margin-bottom: 5vh;
     }
 
     #playButton:hover {
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
 
     #playButton::before {
       content: "▶";
-      font-size: 42px;
+      font-size: 8vw;
+      max-font-size: 42px;
       color: #000;
-      margin-left: 5px;
+      margin-left: 2px;
     }
 
     @keyframes pulse {
@@ -53,7 +58,7 @@
     }
 
     #audio {
-      width: 90%;
+      width: 100%;
       max-width: 600px;
       visibility: hidden;
     }
